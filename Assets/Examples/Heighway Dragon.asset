@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12bef6d73338c4e47a857f020c7b366b, type: 3}
+  m_Name: Heighway Dragon
+  m_EditorClassIdentifier: 
+  name: Heighway Dragon
+  angle: 90
+  iteration: 12
+  axiom: FX
+  _rules:
+  - symbol: 88
+    axiom: X+YF+
+  - symbol: 89
+    axiom: -FX-Y
+  constants: 
+  stemLength: 1
+  stemThickness: 1.5
+  position: {x: 0, y: 50, z: 0}
