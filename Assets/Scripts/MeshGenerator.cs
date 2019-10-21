@@ -10,15 +10,12 @@ public class MeshGenerator : MonoBehaviour
     private List<Vector3> vertices = new List<Vector3>();
     private List<int> triangles = new List<int>();
     private int triangleCnt = 0;
+    public int triangleCursor = 0;
     public Material material;
     [HideInInspector]
     public float stemLength = 5f;
     [HideInInspector]
     public float stemThicknes = 0.5f;
-    [HideInInspector]
-    public Vector3 lastPositionL = Vector3.zero;
-    [HideInInspector]
-    public Vector3 lastPositionR = new Vector3(1, 0, 0);
     [HideInInspector]
     public Vector3 lastPosition = Vector3.zero;
     private Quaternion rotation = Quaternion.identity;
@@ -30,6 +27,7 @@ public class MeshGenerator : MonoBehaviour
             return mesh.vertices.Length;
         }
     }
+
 
     void Awake()
     {
@@ -47,13 +45,13 @@ public class MeshGenerator : MonoBehaviour
         vertices.Clear();
         triangles.Clear();
         triangleCnt = 0;
-        lastPositionL = Vector3.zero;
-        lastPositionR = new Vector3(1, 0, 0);
+        triangleCursor = 0;
         lastPosition = Vector3.zero;
         rotation = Quaternion.identity;
         lastRotation = Quaternion.identity;
         UpdateMesh();
     }
+
     public void UpdateMesh()
     {
         mesh.Clear();
@@ -66,17 +64,18 @@ public class MeshGenerator : MonoBehaviour
     {
         var t = stemThicknes / 2;
         var l = stemLength;
-        vertices.AddRange(new Vector3[]{
-                lastPosition + rotation * new Vector3(-t*0.99f,0,0),
-                lastPosition + rotation * new Vector3(t*0.99f,0,0),
-                lastPosition + rotation * new Vector3(-t,l+t,0),
-                lastPosition + rotation * new Vector3(t,l+t,0),
 
-                lastPosition + rotation * new Vector3(0,0,-t*0.99f),
-                lastPosition + rotation * new Vector3(0,0,t*0.99f),
-                lastPosition + rotation * new Vector3(0,l+t,-t),
-                lastPosition + rotation * new Vector3(0,l+t,t),
-            });
+        vertices.AddRange(new Vector3[]{
+            lastPosition + rotation * new Vector3(-t*0.99f,0,0),
+            lastPosition + rotation * new Vector3(t*0.99f,0,0),
+            lastPosition + rotation * new Vector3(-t,l+t,0),
+            lastPosition + rotation * new Vector3(t,l+t,0),
+
+            lastPosition + rotation * new Vector3(0,0,-t*0.99f),
+            lastPosition + rotation * new Vector3(0,0,t*0.99f),
+            lastPosition + rotation * new Vector3(0,l+t,-t),
+            lastPosition + rotation * new Vector3(0,l+t,t),
+        });
         lastPosition = lastPosition + rotation * new Vector3(0, l, 0);
         lastRotation = rotation;
         var c = triangleCnt;
@@ -91,8 +90,69 @@ public class MeshGenerator : MonoBehaviour
             c+1,c+3,c+7,
 
             c+5,c+2,c,
-            c+5,c+7,c+2
+            c+5,c+7,c+2,
+
+            c+7,c+6,c+2,
+            c+6,c+7,c+3,
+
+            c+5,c,c+4,
+            c+4,c+1,c+5,
         });
         triangleCnt += 8;
+    }
+    public void CreateShapeMergedVertices(Quaternion rotation)
+    {
+        var t = stemThicknes / 2;
+        var l = stemLength;
+        if (vertices.Count == 0)
+        {
+            vertices.AddRange(new Vector3[]{
+                lastPosition + rotation * new Vector3(-t,t,0),
+                lastPosition + rotation * new Vector3(t,t,0),
+                lastPosition + rotation * new Vector3(0,t,-t),
+                lastPosition + rotation * new Vector3(0,t,t),
+            });
+            triangles.AddRange(new List<int>{
+                1,0,2,
+                0,1,3
+            });
+            triangleCnt = 4;
+            triangleCursor = 0;
+        }
+        vertices.AddRange(new Vector3[]{
+            lastPosition + rotation * new Vector3(-t,l+t,0),
+            lastPosition + rotation * new Vector3(t,l+t,0),
+            lastPosition + rotation * new Vector3(0,l+t,-t),
+            lastPosition + rotation * new Vector3(0,l+t,t),
+        });
+        lastPosition = lastPosition + rotation * new Vector3(0, l, 0);
+        lastRotation = rotation;
+        var c = triangleCnt;
+        var s = triangleCursor;
+        triangles.AddRange(new List<int>{
+            s,c+2,s+2,
+            s,c,c+2,
+
+            s+2,c+1,s+1,
+            s+2,c+2,c+1,
+
+            s+1,c+3,s+3,
+            s+1,c+1,c+3,
+
+            s+3,c,s,
+            s+3,c+3,c
+        });
+        triangleCursor = triangleCnt;
+        triangleCnt += 4;
+    }
+
+    public void CloseShape()
+    {
+        var c = triangleCnt;
+        triangles.AddRange(new List<int>
+        {
+            c-2,c-1,c-3,
+            c-1,c-2,c-4
+        });
     }
 }

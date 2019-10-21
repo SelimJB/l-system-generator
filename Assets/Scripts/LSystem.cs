@@ -59,6 +59,15 @@ public abstract class LSystem : MonoBehaviour
 
     protected abstract void Letter();
     protected abstract void ClosingBracket();
+    
+    protected virtual void OpeningBracket()
+    {
+        transformStack.Push(new TransformInfo()
+        {
+            position = lastPosition,
+            rotation = lastRotation
+        });
+    }
 
     protected void GenerateFigure()
     {
@@ -95,11 +104,7 @@ public abstract class LSystem : MonoBehaviour
                         lastRotation *= Quaternion.Euler(-parameters.angle, 0, 0);
                         break;
                     case '[':
-                        transformStack.Push(new TransformInfo()
-                        {
-                            position = lastPosition,
-                            rotation = lastRotation
-                        });
+                        OpeningBracket();
                         break;
                     case ']':
                         ClosingBracket();
