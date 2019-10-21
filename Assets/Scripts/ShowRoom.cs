@@ -7,7 +7,6 @@ public class ShowRoom : MonoBehaviour
     private LSystem lSystem;
     public LSystemParameters[] exemples;
     private string lSystemInformations;
-
     void Start()
     {
         lSystem = GetComponent<LSystem>();
@@ -36,7 +35,7 @@ public class ShowRoom : MonoBehaviour
         {
             if (GUILayout.Button(ex.name, guiOptions))
             {
-                lSystem.Reset();
+                lSystem.Reinitialise();
                 lSystem.parameters = ex;
                 lSystem.Generate();
                 lSystemInformations = lSystem.parameters.ToString();

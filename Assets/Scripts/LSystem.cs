@@ -13,17 +13,19 @@ public abstract class LSystem : MonoBehaviour
     protected Quaternion lastRotation = Quaternion.identity;
     protected string currentPath = "";
     protected Vector3 stem;
+    public virtual int MeshVerticesCount { get { return 0; } }
 
     protected virtual void Awake()
     {
         transformStack = new Stack<TransformInfo>();
     }
 
-    protected virtual void Start(){
+    protected virtual void Start()
+    {
         Generate();
     }
-    
-    public virtual void Reset()
+
+    public virtual void Reinitialise()
     {
         transformStack.Clear();
         lastPosition = Vector3.zero;
@@ -46,7 +48,6 @@ public abstract class LSystem : MonoBehaviour
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < parameters.iteration; i++)
         {
-            // Debug.Log(String.Format("Iteration n°{0} : \t{1}", i, currentPath));
             foreach (char step in currentPath)
             {
                 stringBuilder.Append(rules.ContainsKey(step) ? rules[step] : step.ToString());
@@ -54,7 +55,6 @@ public abstract class LSystem : MonoBehaviour
             currentPath = stringBuilder.ToString();
             stringBuilder = new StringBuilder();
         }
-        // Debug.Log(String.Format("Iteration n°{0} : \t{1}", parameters.iteration, currentPath));
     }
 
     protected abstract void Letter();

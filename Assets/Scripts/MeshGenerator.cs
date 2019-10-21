@@ -23,6 +23,13 @@ public class MeshGenerator : MonoBehaviour
     public Vector3 lastPosition = Vector3.zero;
     private Quaternion rotation = Quaternion.identity;
     private Quaternion lastRotation = Quaternion.identity;
+    public int MeshVerticeNbr
+    {
+        get
+        {
+            return mesh.vertices.Length;
+        }
+    }
 
     void Awake()
     {
@@ -35,7 +42,7 @@ public class MeshGenerator : MonoBehaviour
         meshFilter.mesh = mesh;
     }
 
-    public void Reset()
+    public void Reinitialise()
     {
         vertices.Clear();
         triangles.Clear();
@@ -53,7 +60,6 @@ public class MeshGenerator : MonoBehaviour
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
         mesh.RecalculateNormals();
-        // Debug.Log(String.Format("Vertices nbr :\t{0}\t|\tTriangles nbr :\t{1}",mesh.vertices.Length,mesh.triangles.Length));
     }
 
     public void CreateShape(Quaternion rotation)

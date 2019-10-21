@@ -4,23 +4,32 @@ using UnityEngine;
 public class LSystemMesh : LSystem
 {
     private MeshGenerator meshViz;
-    
+    public override int MeshVerticesCount
+    {
+        get
+        {
+            return meshViz.MeshVerticeNbr;
+        }
+    }
+
     protected override void Awake()
     {
         meshViz = GetComponent<MeshGenerator>();
         base.Awake();
     }
 
-    public override void Generate(){
+    public override void Generate()
+    {
         meshViz.stemLength = parameters.stemLength;
         meshViz.stemThicknes = parameters.stemThickness;
         base.Generate();
         meshViz.UpdateMesh();
     }
 
-    public override void Reset(){
-        base.Reset();
-        meshViz.Reset();
+    public override void Reinitialise()
+    {
+        base.Reinitialise();
+        meshViz.Reinitialise();
     }
 
     protected override void Letter()

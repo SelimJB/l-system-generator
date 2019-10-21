@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Heighway Dragon
   angle: 90
-  iteration: 12
+  iteration: 11
   axiom: FX
   _rules:
   - symbol: 88
-    axiom: X+YF+
-  - symbol: 89
-    axiom: -FX-Y
+    axiom: X+HF+
+  - symbol: 72
+    axiom: -FX-H
+  - symbol: 70
+    axiom: F
   constants: 
   stemLength: 1
-  stemThickness: 1.5
-  position: {x: 0, y: 50, z: 0}
+  stemThickness: 1.2
+  position: {x: 0, y: 20, z: 0}

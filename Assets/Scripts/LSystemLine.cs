@@ -14,9 +14,9 @@ public class LSystemLine : LSystem
         lineCount++;
     }
 
-    public override void Reset()
+    public override void Reinitialise()
     {
-        base.Reset();
+        base.Reinitialise();
     }
     protected override void ClosingBracket()
     {
