@@ -1,13 +1,14 @@
 # L-System Generator
 
-> Procedural plant and fractal generator:  
+Procedural plant and fractal generator:  
 Create, visualize, and experiment with L-Systems in 3D.
 
 - [Experiment](https://lombardidelavega.itch.io/l-system)
 - [Learn more about L-Systems](https://en.wikipedia.org/wiki/L-system)
 
+![Demo](docs/lsystem.gif)  
+
 ![Demo](docs/editor.gif)
-![Demo](docs/lsystem.gif)
 
 This project was created in 2018, and I recently made a quick update to migrate it from GitLab to GitHub, recompiling it, adding a README, and publishing it on [itch.io](https://lombardidelavega.itch.io/l-system).
 
@@ -26,9 +27,9 @@ The mesh generation algorithm is quite basic and could be enhanced in different 
 ## Examples
 
 ### Coral
+![Coral representation](docs/coral.gif)  
 ![Coral configuration](docs/coral.png)
-![Coral representation](docs/coral.gif)
 
 ### Tree
+![Tree representation](docs/tree.gif)  
 ![Tree configuration](docs/tree.png)
-![Tree representation](docs/tree.gif)
