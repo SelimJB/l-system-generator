@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,28 +5,19 @@ public class MeshGenerator : MonoBehaviour
 {
     private Mesh mesh;
     private MeshFilter meshFilter;
-    private List<Vector3> vertices = new List<Vector3>();
-    private List<int> triangles = new List<int>();
-    private int triangleCnt = 0;
-    public int triangleCursor = 0;
+    private readonly List<Vector3> vertices = new ();
+    private readonly List<int> triangles = new ();
+    private int triangleCnt;
+    public int triangleCursor;
     public Material material;
-    [HideInInspector]
-    public float stemLength = 5f;
-    [HideInInspector]
-    public float stemThicknes = 0.5f;
-    [HideInInspector]
-    public Vector3 lastPosition = Vector3.zero;
+    [HideInInspector] public float stemLength = 5f;
+    [HideInInspector] public float stemThickness = 0.5f;
+    [HideInInspector] public Vector3 lastPosition = Vector3.zero;
     private Quaternion rotation = Quaternion.identity;
     private Quaternion lastRotation = Quaternion.identity;
-    public int MeshVerticeNbr
-    {
-        get
-        {
-            return mesh.vertices.Length;
-        }
-    }
-
-
+    
+    public int MeshVerticeNbr => mesh.vertices.Length;
+    
     void Awake()
     {
         mesh = new Mesh();
@@ -62,7 +51,7 @@ public class MeshGenerator : MonoBehaviour
 
     public void CreateShape(Quaternion rotation)
     {
-        var t = stemThicknes / 2;
+        var t = stemThickness / 2;
         var l = stemLength;
 
         vertices.AddRange(new Vector3[]{
@@ -100,9 +89,10 @@ public class MeshGenerator : MonoBehaviour
         });
         triangleCnt += 8;
     }
+
     public void CreateShapeMergedVertices(Quaternion rotation)
     {
-        var t = stemThicknes / 2;
+        var t = stemThickness / 2;
         var l = stemLength;
         if (vertices.Count == 0)
         {

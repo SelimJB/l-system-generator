@@ -13,31 +13,27 @@ public class LSystemLine : LSystem
         lineRenderer.SetPosition(lineCount, lastPosition);
         lineCount++;
     }
-
-    public override void Reinitialise()
-    {
-        base.Reinitialise();
-    }
+    
     protected override void ClosingBracket()
     {
-        TransformInfo ti = transformStack.Pop();
+        var ti = transformStack.Pop();
         lastPosition = ti.position;
         lastRotation = ti.rotation;
 
         var lineRendererPositionNbr = lineRendererPositionNbrQueue.Dequeue();
-        if (lineRendererPositionNbr > 0)
-        {
-            var child = new GameObject();
-            child.transform.parent = transform;
-            lineRenderer = child.AddComponent<LineRenderer>();
-            lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-            lineRenderer.positionCount = lineRendererPositionNbr;
-            SetupLineRenderer();
-            lineCount = 1;
-        }
+
+        if (lineRendererPositionNbr <= 0) return;
+        
+        var child = new GameObject();
+        child.transform.parent = transform;
+        lineRenderer = child.AddComponent<LineRenderer>();
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        lineRenderer.positionCount = lineRendererPositionNbr;
+        SetupLineRenderer();
+        lineCount = 1;
     }
 
-    public void SetupLineRenderer()
+    private void SetupLineRenderer()
     {
         lineRenderer.startColor = Color.cyan;
         lineRenderer.endColor = Color.blue;

@@ -51,7 +51,7 @@ public class CameraController : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         else
         {
@@ -63,10 +63,9 @@ public class CameraController : MonoBehaviour
     {
         var up = (transform.rotation * Vector3.up).normalized;
         var left = (transform.rotation * Vector3.left).normalized;
-        float step = mooveSpeed * Time.deltaTime;
-        float orbitCircumfrance = 2F * distance * Mathf.PI;
-        float distanceDegrees = (mooveSpeed / orbitCircumfrance) * 360;
-        float distanceRadians = (mooveSpeed / orbitCircumfrance) * 2 * Mathf.PI;
+        var orbitCircumfrance = 2F * distance * Mathf.PI;
+        var distanceRadians = (mooveSpeed / orbitCircumfrance) * 2 * Mathf.PI;
+
         if (d == Direction.Right)
         {
             transform.RotateAround(center, up, -distanceRadians);
@@ -82,10 +81,8 @@ public class CameraController : MonoBehaviour
     private void AutomaticOrbitalCam()
     {
         var up = (transform.rotation * Vector3.up).normalized;
-        float step = orbitalSpeed * Time.deltaTime;
-        float orbitCircumfrance = 2F * distance * Mathf.PI;
-        float distanceDegrees = (orbitalSpeed / orbitCircumfrance) * 360;
-        float distanceRadians = (orbitalSpeed / orbitCircumfrance) * 2 * Mathf.PI;
+        var orbitCircumfrance = 2F * distance * Mathf.PI;
+        var distanceRadians = (orbitalSpeed / orbitCircumfrance) * 2 * Mathf.PI;
         transform.RotateAround(center, up, -distanceRadians);
     }
 

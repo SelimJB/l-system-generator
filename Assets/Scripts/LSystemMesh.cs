@@ -4,13 +4,8 @@ using UnityEngine;
 public class LSystemMesh : LSystem
 {
     private MeshGenerator meshViz;
-    public override int MeshVerticesCount
-    {
-        get
-        {
-            return meshViz.MeshVerticeNbr;
-        }
-    }
+    
+    public override int MeshVerticesCount => meshViz.MeshVerticeNbr;
 
     protected override void Awake()
     {
@@ -21,7 +16,7 @@ public class LSystemMesh : LSystem
     public override void Generate()
     {
         meshViz.stemLength = parameters.stemLength;
-        meshViz.stemThicknes = parameters.stemThickness;
+        meshViz.stemThickness = parameters.stemThickness;
         base.Generate();
         meshViz.UpdateMesh();
     }

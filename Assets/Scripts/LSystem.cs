@@ -13,7 +13,7 @@ public abstract class LSystem : MonoBehaviour
     protected Quaternion lastRotation = Quaternion.identity;
     protected string currentPath = "";
     protected Vector3 stem;
-    public virtual int MeshVerticesCount { get { return 0; } }
+    public virtual int MeshVerticesCount => 0;
 
     protected virtual void Awake()
     {
@@ -74,10 +74,9 @@ public abstract class LSystem : MonoBehaviour
         for (var i = 0; i < currentPath.Length; i++)
         {
             if (parameters.constants.Contains(currentPath[i]))
-            {
                 continue;
-            }
-            else if (Char.IsLetter(currentPath[i]))
+            
+            if (Char.IsLetter(currentPath[i]))
             {
                 Letter();
             }

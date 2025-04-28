@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Text;
 
 [RequireComponent(typeof(LSystem))]
 public class ShowRoom : MonoBehaviour
@@ -7,6 +6,7 @@ public class ShowRoom : MonoBehaviour
     private LSystem lSystem;
     public LSystemParameters[] exemples;
     private string lSystemInformations;
+    
     void Start()
     {
         lSystem = GetComponent<LSystem>();
