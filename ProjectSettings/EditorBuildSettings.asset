@@ -6,12 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ShowRoom.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: Assets/Scenes/Exemple - MeshRenderer.unity
-    guid: d49c80085d16c084bb51f73f06a98485
-  - enabled: 0
+    path: Assets/Scenes/ShowRoom merged vertices.unity
+    guid: ad31370b76917f14898fa9b2a3ec0ede
+  - enabled: 1
     path: Assets/Scenes/Sandbox.unity
     guid: 8f31cd21d543c99409856f1bcf1be11e
+  - enabled: 1
+    path: Assets/Scenes/Sandbox merged vertices.unity
+    guid: 3ab53565f7edfca4bb253129bca2616e
+  - enabled: 1
+    path: Assets/Scenes/Exemple - LineRenderer.unity
+    guid: ecf1c5eeace59534b9df1c625ae764c5
+  - enabled: 1
+    path: Assets/Scenes/Exemple - MeshRenderer.unity
+    guid: d49c80085d16c084bb51f73f06a98485
   m_configObjects: {}
